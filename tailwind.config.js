@@ -10,9 +10,10 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+
         'metaversal-light-purple': "#e9d5ff",
-        'metaversal-light-peach': "#fdede7"
-      },
+        'metaversal-light-peach': "#fdede7",
+      }
     },
   },
   plugins: [],
