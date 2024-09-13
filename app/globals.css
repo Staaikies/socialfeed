@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.metaversal-btn-primary {
+  background: linear-gradient(180deg, rgba(255, 0, 115, 1) -114.9%, rgba(129, 26, 184, 1) -51.51%, rgba(68, 38, 217, 1) 100%);
+}
+.metaversal-btn-primary:hover {
+  background: linear-gradient(180deg, rgba(255, 0, 115, 1) -85.89%, rgba(129, 26, 184, 1) 34.45%, rgba(68, 38, 217, 1) 100%);
+}
+

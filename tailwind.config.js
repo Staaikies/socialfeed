@@ -11,8 +11,11 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
 
-        'metaversal-light-purple': "#e9d5ff",
-        'metaversal-light-peach': "#fdede7",
+        'metaversal-primary': "#4426D9",
+        'metaversal-light-purple': "#ECE9FB",
+        'metaversal-light-peach': "#FDEDE7",
+
+        
       }
     },
   },
