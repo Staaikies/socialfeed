@@ -23,7 +23,7 @@ export const UserCard = () => {
   )
 }
 
-export const UserCardSmall = () => {
+export const UserCardSmall = ({firstName, lastName, username}) => {
   return (
     <div className="p-4 drop-shadow-sm grid grid-cols-6 gap-4 border-2 border-solid border-slate-100 hover:border-slate-300 hover:cursor-pointer rounded-xl transition-all duration-100 ease-linear">
       <Image 
@@ -35,8 +35,8 @@ export const UserCardSmall = () => {
         priority
       />
       <div className="col-span-3">
-        <h4 className="text-lg font-bold">Skylar Dryden</h4>
-        <p className="text-sm text-slate-600">@emilys</p>
+        <h4 className="text-lg font-bold">{firstName} {lastName}</h4>
+        <p className="text-sm text-slate-600">@{username}</p>
       </div>
       <Button style="secondary" size="large" className="self-center justify-self-end col-start-6 col-end-6">Follow</Button>
     </div>
