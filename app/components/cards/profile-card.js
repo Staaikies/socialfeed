@@ -16,7 +16,7 @@ const DepartmentPill = ({department}) => {
   )
 }
 
-const ProfileCard = () => {
+const ProfileCard = ({firstName, lastName, username, address, department, posts, }) => {
   return (
     <div className="bg-white drop-shadow-sm rounded-xl border-2 border-solid border-slate-100 relative min-h-48 max-w-64 lg:max-w-full">
       <div className="h-11 bg-gradient-to-r from-metaversal-light-purple to-metaversal-light-peach rounded-t-xl"></div>
@@ -32,11 +32,11 @@ const ProfileCard = () => {
           />
         </div>
         <div className="pl-2 pt-2 pr-2 pb-5 col-span-full lg:col-span-3 text-center lg:text-left">
-          <h4 className="text-xl text-black font-bold">Skylar Dryden</h4>
-          <p className="text-sm text-slate-600 lg:inline">@emilys</p>
-          <p className="text-sm text-slate-600 lg:inline lg:ml-1"><Icon icon={LocationIcon} />New York, United States</p>
+          <h4 className="text-xl text-black font-bold">{firstName} {lastName}</h4>
+          <p className="text-sm text-slate-600 lg:inline">@{username}</p>
+          <p className="text-sm text-slate-600 lg:inline lg:ml-1"><Icon icon={LocationIcon} />{address.city}, {address.country}</p>
           <div className="col-span-full mt-1 mb-3">
-            <DepartmentPill department="Engineering" />
+            <DepartmentPill department={department} />
           </div>
           <div className="col-span-full">
             <div className="w-fit ml-auto mr-auto lg:ml-0 lg:mr-0">

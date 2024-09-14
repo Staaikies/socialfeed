@@ -68,6 +68,9 @@ export default function Home() {
       username: match.username } : post;
   });
 
+  console.log(posts);
+  console.log(users);
+
   const topPosts = mergedPosts
     .sort((a, b) => b.reactions.likes - a.reactions.likes)
     .slice(0, 2);
@@ -81,6 +84,7 @@ export default function Home() {
         {topPosts.map(post => (
           <PostCard 
             key={post.id}
+            id={post.id}
             firstName={post.firstName}
             username={post.username}
             body={post.body}
@@ -106,6 +110,7 @@ export default function Home() {
         <h2 className="text-xl font-bold mb-2">Recent</h2>
         {mergedPosts.map(post => (
           <PostCard 
+            id={post.id}
             key={post.id}
             firstName={post.firstName}
             username={post.username}

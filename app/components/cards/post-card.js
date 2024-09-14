@@ -1,11 +1,12 @@
 "use client";
 import { useState } from 'react';
 import Image from "next/image";
+import Link from 'next/link';
 import Avatar from "../../img/Avatar.png";
 import { PostStats } from "../common";
 
 
-const PostCard = ({firstName, lastName, username, body, tags, likes, dislikes, views}) => {
+const PostCard = ({id, firstName, lastName, username, body, tags, likes, dislikes, views}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = (e) => {
@@ -16,20 +17,22 @@ const PostCard = ({firstName, lastName, username, body, tags, likes, dislikes, v
   let postContent = String(body);
 
 
-  console.log(likes);
+  console.log(id);
 
   return (
     <div className="pt-4 drop-shadow-sm border-2 border-solid border-slate-100 rounded-xl mb-4">
       <div className="grid grid-cols-5">
         <div className="pl-4">
-        <Image 
-            className="rounded-full"
-            src={Avatar}
-            alt="Avatar"
-            width={46}
-            height={30}
-            priority
-          />
+        <Link href={`/profile/${id}`}>
+          <Image 
+              className="rounded-full"
+              src={Avatar}
+              alt="Avatar"
+              width={46}
+              height={30}
+              priority
+            />
+          </Link>
         </div>
         <div className="col-span-4 pr-4">
           <h4 className="text-lg font-bold">{firstName} {lastName}</h4>

@@ -25,7 +25,7 @@
   height: 12px;
   background-image: url('./img/icons/chevron-left-icon.svg');
 }
-.icon--chevron-left:hover {
+.back-button:hover .icon--chevron-left {
   background-image: url('./img/icons/chevron-left-hover-icon.svg');
 }
 .icon--eye {
