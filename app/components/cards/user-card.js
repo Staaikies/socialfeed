@@ -1,7 +1,7 @@
-import { PostsAndLikes } from "./common";
-import { Button } from "./common";
+import { PostsAndLikes } from "../common";
+import { Button } from "../common";
 import Image from "next/image";
-import Avatar from "../img/Avatar.png";
+import Avatar from "../../img/Avatar.png";
 
 export const UserCard = () => {
   return (

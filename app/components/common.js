@@ -50,15 +50,15 @@ export const PostStats = ({likes, dislikes, views}) => {
     <div className="grid grid-flow-col auto-cols-max gap-4">
       <p className="post-stat text-sm text-slate-500 hover:text-slate-700 active:text-metaversal-primary">
         <i className="icon icon--thumbsup"></i>
-        26
+        {likes}
       </p>
       <p className="post-stat text-sm text-slate-500 hover:text-slate-700 active:text-metaversal-primary">
         <i className="icon icon--share"></i>
-        11
+        {dislikes}
       </p>
       <p className="post-stat text-sm text-slate-500">
         <i className="icon icon--eye"></i>
-        1312
+        {views}
       </p>
     </div>
   )

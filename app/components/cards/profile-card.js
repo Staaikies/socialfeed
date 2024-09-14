@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Avatar from "../img/Avatar.png";
-import LocationIcon from "../img/icons/location-icon.svg";
+import Avatar from "../../img/Avatar.png";
+import LocationIcon from "../../img/icons/location-icon.svg";
 
-import { PostsAndLikes, Button, Icon } from "./common";
+import { PostsAndLikes, Button, Icon } from "../common";
 
 const DepartmentPill = ({department}) => {
   let colorClasses; 
@@ -34,8 +34,8 @@ const ProfileCard = () => {
         <div className="pl-2 pt-2 pr-2 pb-5 col-span-full lg:col-span-3 text-center lg:text-left">
           <h4 className="text-xl text-black font-bold">Skylar Dryden</h4>
           <p className="text-sm text-slate-600 lg:inline">@emilys</p>
-          <p className="text-sm text-slate-600 mb-1.5 lg:inline lg:ml-1"><Icon icon={LocationIcon} />New York, United States</p>
-          <div className="col-span-full mb-3">
+          <p className="text-sm text-slate-600 lg:inline lg:ml-1"><Icon icon={LocationIcon} />New York, United States</p>
+          <div className="col-span-full mt-1 mb-3">
             <DepartmentPill department="Engineering" />
           </div>
           <div className="col-span-full">
