@@ -35,7 +35,6 @@ export default function Home() {
     const getData = async () => {
       setLoading(true);
       try {
-        // Check if data is in local storage
         const cachedPosts = localStorage.getItem('posts');
         const cachedUsers = localStorage.getItem('users');
 
@@ -68,7 +67,6 @@ export default function Home() {
 
           setPosts(combinedData);
 
-          // Save data to local storage
           localStorage.setItem('posts', JSON.stringify(postsData));
           localStorage.setItem('users', JSON.stringify(usersData));
         }
