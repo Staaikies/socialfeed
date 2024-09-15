@@ -6,7 +6,7 @@ import Avatar from "../../img/Avatar.png";
 import { PostStats } from "../common";
 
 
-const PostCard = ({id, firstName, lastName, username, body, tags, likes, dislikes, views}) => {
+const PostCard = ({userId, firstName, lastName, username, body, tags, reactions, views}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = (e) => {
@@ -16,26 +16,25 @@ const PostCard = ({id, firstName, lastName, username, body, tags, likes, dislike
 
   let postContent = String(body);
 
-
-  console.log(id);
-
   return (
     <div className="pt-4 drop-shadow-sm border-2 border-solid border-slate-100 rounded-xl mb-4">
-      <div className="grid grid-cols-5">
-        <div className="pl-4">
-        <Link href={`/profile/${id}`}>
-          <Image 
-              className="rounded-full"
+      <div className="flex">
+        <div className="min-w-20 pl-4">
+          <Link href={`/profile/${userId}`}>
+            <Image 
+              className="rounded-full hover:opacity-70"
               src={Avatar}
               alt="Avatar"
-              width={46}
-              height={30}
+              width={50}
+              height={36}
               priority
             />
           </Link>
         </div>
-        <div className="col-span-4 pr-4">
-          <h4 className="text-lg font-bold">{firstName} {lastName}</h4>
+        <div className="grow pr-4">
+          <Link href={`/profile/${userId}`}>
+            <h4 className="text-lg font-bold hover:underline">{firstName} {lastName}</h4>
+          </Link>
           <p className="text-sm text-slate-600 mb-3.5">@{username}</p>
           {isExpanded ? postContent : `${postContent.substring(0, 150)}...`}
             {postContent.length > 80 && (
@@ -51,7 +50,7 @@ const PostCard = ({id, firstName, lastName, username, body, tags, likes, dislike
         </div>
       </div>
       <div className="p-4 w-full border-solid border-slate-100 border-t-2 rounded-b-xl grid grid-flow-col auto-cols-min gap-4">
-        <PostStats likes={likes} dislikes={dislikes} views={views} />
+        <PostStats likes={reactions.likes} dislikes={reactions.dislikes} views={views} />
       </div>
     </div>
   )

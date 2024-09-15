@@ -3,6 +3,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ProfileCard from '@/app/components/cards/profile-card';
 import TitleBar from '@/app/components/cards/title-bar';
+import PostCard from '@/app/components/cards/post-card';
 
 export default function Profile() {
   const { id } = useParams();
@@ -26,13 +27,11 @@ export default function Profile() {
     async function fetchPosts() {
       const response = await fetch(`https://dummyjson.com/users/${userId}/posts`);
       const data = await response.json();
-      setUserPosts(data);
+      setUserPosts(data.posts);
     }
 
     fetchPosts();
   }, []);
-
-  console.log(userPosts);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -48,7 +47,17 @@ export default function Profile() {
         username={user.username}
         address={user.address}
         department={user.company.department}
+        posts={userPosts}
       />
+      {userPosts.map(post => (
+        <PostCard 
+          key={post.id} 
+          firstName={user.firstName} 
+          lastName={user.lastName} 
+          username={user.username} 
+          {...post} 
+        />
+      ))}
       </div>
 
       

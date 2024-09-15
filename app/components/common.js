@@ -23,22 +23,6 @@ export const Button = ({style, size, className, children}) => {
   )
 }
 
-export const PostsAndLikes = ({posts, likes}) => {
-  return (
-    <div className="grid grid-cols-2 grid-rows-1 content-center min-w-32 max-w-32">
-      {/* TODO: if no classes used here, use fragments */}
-      <div className="">
-        <p className="text-lg w-full font-bold">{posts}</p>
-        <p className="text-xs uppercase text-slate-600">Posts</p>
-      </div>
-      <div className="">
-        <p className="text-lg w-full font-bold">{likes}</p>
-        <p className="text-xs uppercase text-slate-600">Likes</p>
-      </div>
-    </div>
-  )
-}
-
 export const Icon = ({icon}) => {
   return (
     <Image src={icon} width={12} height={12} className="inline ml-1 mr-1" />
