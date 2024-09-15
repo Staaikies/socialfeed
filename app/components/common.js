@@ -58,3 +58,13 @@ export const PostStats = ({likes, dislikes, views}) => {
     </div>
   )
 }
+
+export const ErrorCard = ({error}) => {
+  return (
+    <div className="p-4 ml-auto mr-auto text-center content-center bg-white drop-shadow-sm rounded-xl border-2 border-solid border-slate-100 relative min-h-48 max-w-64 lg:max-w-full">
+      <i className="icon icon--error"></i>
+      <h4 className="text-lg font-bold mt-2">{error.toString()}</h4>
+      <p className="text-slate-500">We're so sorry but it's for the test.</p>
+    </div>
+  )
+}

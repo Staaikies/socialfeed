@@ -20,6 +20,11 @@
   margin-bottom: -2px;
   background-size: cover;
 }
+.icon--error {
+  width: 42px;
+  height: 42px;
+  background-image: url('./img/icons/error-icon.svg');
+}
 .icon--chevron-left {
   width: 6px;
   height: 12px;
@@ -32,6 +37,12 @@
   width: 20px;
   height: 15px;
   background-image: url('./img/icons/eye-icon.svg');
+}
+.icon--location {
+  width: 12px;
+  height: 14px;
+  margin-right: 2px;
+  background-image: url('./img/icons/location-icon.svg');
 }
 .icon--thumbsup {
   background-image: url('./img/icons/thumbsup-icon.svg');

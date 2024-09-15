@@ -3,16 +3,20 @@ import { useEffect, useState, useRef } from 'react';
 import TitleBar from "./components/cards/title-bar";
 import PostCard from "./components/cards/post-card";
 import { UserCardSmall } from "./components/cards/user-card";
-import { LoadingSpinner } from './components/common';
+import { LoadingSpinner, ErrorCard } from './components/common';
 
 const fetchPosts = async () => {
-  const response = await fetch('https://dummyjson.com/posts');
+  const response = await fetch('https://dummyjson.com/posts', {
+    cache: 'force-cache'
+  });
   const data = await response.json();
   return data.posts;
 };
 
 const fetchUser = async (userId) => {
-  const response = await fetch(`https://dummyjson.com/users/${userId}`);
+  const response = await fetch(`https://dummyjson.com/users/${userId}`, {
+    cache: 'force-cache'
+  });
   const data = await response.json();
   return data;
 };
@@ -24,29 +28,52 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [loadMoreLoading, setLoadMoreLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
+  const [error, setError] = useState();
   const loadMoreRef = useRef(null);
 
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
       try {
-        const postsData = await fetchPosts();
+        // Check if data is in local storage
+        const cachedPosts = localStorage.getItem('posts');
+        const cachedUsers = localStorage.getItem('users');
 
-        const userPromises = postsData.map(post => fetchUser(post.userId));
-        const usersData = await Promise.all(userPromises);
+        if (cachedPosts && cachedUsers) {
+          const postsData = JSON.parse(cachedPosts);
+          const usersData = JSON.parse(cachedUsers);
 
-        setUsers(usersData);
+          setPosts(postsData);
+          setUsers(usersData);
 
-        const combinedData = postsData.map(post => ({
-          ...post,
-          user: usersData.find(user => user.id === post.userId),
-        }));
+          const combinedData = postsData.map(post => ({
+            ...post,
+            user: usersData.find(user => user.id === post.userId),
+          }));
 
-        setPosts(combinedData);
-        setDisplayedPosts(posts);
+          setPosts(combinedData);
+          setDisplayedPosts(posts);
+        } else {
+          const postsData = await fetchPosts();
 
+          const userPromises = postsData.map(post => fetchUser(post.userId));
+          const usersData = await Promise.all(userPromises);
+
+          setUsers(usersData);
+
+          const combinedData = postsData.map(post => ({
+            ...post,
+            user: usersData.find(user => user.id === post.userId),
+          }));
+
+          setPosts(combinedData);
+
+          // Save data to local storage
+          localStorage.setItem('posts', JSON.stringify(postsData));
+          localStorage.setItem('users', JSON.stringify(usersData));
+        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -97,10 +124,21 @@ export default function Home() {
     return users.find(user => user.id === postId);
   }
 
+  if (error) {
+    return (
+      <div>
+        <TitleBar title="Feed" />
+        <div className="max-w-screen-md ml-auto mr-auto p-8">
+          <ErrorCard error={error} />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
       <TitleBar title="Feed" />
-      <div className="max-w-screen-md ml-auto mr-auto p-4">
+      <div className="max-w-screen-md ml-auto mr-auto p-8">
         {loading === true ?
           <div className="mt-10">
             <LoadingSpinner />
@@ -119,7 +157,7 @@ export default function Home() {
             ))}
 
             <h2 className="text-xl font-bold mb-2">Who to follow</h2>
-            <div className="grid gris-cols-1 lg:grid-cols-2 grid-rows-2 gap-4">
+            <div className="grid gris-cols-1 md:grid-cols-2 grid-rows-2 gap-4 mb-4">
               {users.slice(0, 4).map(user => (
                 <UserCardSmall 
                   key={user.id} 
@@ -137,11 +175,11 @@ export default function Home() {
                 username={findUser(post.userId).username}
               {...post} />
             ))}
-            {(loadMoreLoading && hasMore) ?
+            {(loadMoreLoading && hasMore) && (
               <div className="mt-6">
                 <LoadingSpinner />
               </div>
-            : ''}
+            )}
             {!hasMore && (<h4 className="text-center text-lg text-slate-400 font-bold">You're all caught up!</h4>)}
             <div ref={loadMoreRef} style={{ height: '100px' }} />
           </>
