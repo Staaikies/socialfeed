@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export const Button = ({style, size, className, children}) => {
   let buttonSize;
   if (size === "small" || "sm") {
@@ -20,12 +18,6 @@ export const Button = ({style, size, className, children}) => {
       `}>
       {children}
     </button>
-  )
-}
-
-export const Icon = ({icon}) => {
-  return (
-    <Image src={icon} width={12} height={12} className="inline ml-1 mr-1" />
   )
 }
 
