@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ProfileCard from '@/app/components/cards/profile-card';
 import TitleBar from '@/app/components/cards/title-bar';
 import PostCard from '@/app/components/cards/post-card';
+import { LoadingSpinner } from '@/app/components/common';
 
 export default function Profile() {
   const { id } = useParams();
@@ -18,7 +19,6 @@ export default function Profile() {
         const data = await response.json();
         setUser(data);
       }
-
       fetchUser();
     }
   }, [userId]);
@@ -33,34 +33,36 @@ export default function Profile() {
     fetchPosts();
   }, []);
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <TitleBar title="Profile" href="/" />
       <div className="max-w-screen-md ml-auto mr-auto p-4">
-      <ProfileCard 
-        firstName={user.firstName}
-        lastName={user.lastName}
-        username={user.username}
-        address={user.address}
-        department={user.company.department}
-        posts={userPosts}
-      />
-      {userPosts.map(post => (
-        <PostCard 
-          key={post.id} 
-          firstName={user.firstName} 
-          lastName={user.lastName} 
-          username={user.username} 
-          {...post} 
-        />
-      ))}
+        {!user ?
+          <div className="mt-10">
+            <LoadingSpinner />
+          </div>
+        :
+          <>
+            <ProfileCard 
+              firstName={user.firstName}
+              lastName={user.lastName}
+              username={user.username}
+              address={user.address}
+              department={user.company.department}
+              posts={userPosts}
+            />
+            {userPosts.map(post => (
+              <PostCard 
+                key={post.id} 
+                firstName={user.firstName} 
+                lastName={user.lastName} 
+                username={user.username} 
+                {...post} 
+              />
+            ))}
+          </>
+        }
       </div>
-
-      
     </div>
   );
 }
